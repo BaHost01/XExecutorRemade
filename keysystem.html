@@ -1,0 +1,918 @@
+﻿<head>
+    <style type="text/css">
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto auto;
+            }
+            
+            .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 20px;
+            min-height: calc(100vh - 40px);
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .ad-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+        }
+
+        .ad-banner {
+            width: 100%;
+            min-height: 250px;
+            background: linear-gradient(45deg, #f7fafc, #edf2f7);
+            border: 2px dashed #cbd5e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .ad-banner ins {
+            display: block !important;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .key-section h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            color: #718096;
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            display: block;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-display {
+            background: #1a202c;
+            color: #00ff88;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            display: none;
+            word-break: break-all;
+        }
+
+        .footer {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-ad {
+            height: 90px;
+            background: linear-gradient(45deg, #f7fafc, #edf2f7);
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 12px;
+        }
+
+        .footer-ad ins {
+            display: block !important;
+        }
+
+        #adModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            margin: auto;
+            padding: 30px;
+            border: none;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .close {
+            color: white;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-ad-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-ad-container ins {
+            display: block !important;
+        }
+
+        </style>
+</head>
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>License Key Generator</title>
+    <!-- Load AdSense script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5327207301471176"
+     crossorigin="anonymous"></script>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 20px;
+            min-height: calc(100vh - 40px);
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .ad-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+        }
+
+        .ad-banner {
+            width: 100%;
+            min-height: 250px;
+            background: linear-gradient(45deg, #f7fafc, #edf2f7);
+            border: 2px dashed #cbd5e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .ad-banner ins {
+            display: block !important;
+        }
+
+        .ad-banner:hover {
+            border-color: #667eea;
+            background: linear-gradient(45deg, #667eea20, #764ba220);
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .key-section h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            display: block;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .key-display {
+            background: #1a202c;
+            color: #00ff88;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            display: none;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #008CBA;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #007B9A;
+            transform: translateY(-1px);
+        }
+
+        /* Modal styles for interstitial ad */
+        #adModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            margin: auto;
+            padding: 30px;
+            border: none;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close {
+            color: white;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:focus {
+            color: #ffeb3b;
+            transform: scale(1.1);
+        }
+
+        .close:hover {
+            color: #ffeb3b;
+            transform: scale(1.1);
+        }
+
+        .modal-ad-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-ad-container ins {
+            display: block !important;
+        }
+
+        .footer {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-ad {
+            height: 90px;
+            background: linear-gradient(45deg, #f7fafc, #edf2f7);
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 12px;
+        }
+
+        .footer-ad ins {
+            display: block !important;
+        }
+
+        .info-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            color: #718096;
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto auto;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+<div class="container">
+    <div class="header">
+        <h1>🔑 License Key Generator</h1>
+        <p>
+            Generate a unique license key for your application. Please support us by viewing the ads.</p>
+    </div>
+    <div class="ad-container">
+        <div class="ad-banner">
+                <!-- Ad1 -->
+                <ins class="adsbygoogle" data-ad-client="ca-pub-5327207301471176" data-ad-format="auto" data-ad-slot="6541775819" data-full-width-responsive="true" style="display:block"></ins>
+        </div>
+        <small style="color: #a0aec0;">Sponsored Content</small>
+    </div>
+    <div class="main-content">
+        <div class="key-section">
+            <h2>Generate Your License Key</h2>
+            <div class="info-box">
+                <h3>📋 How it works:</h3>
+                <ul>
+                    <li>Click &quot;Generate Key&quot; to create your unique license</li>
+                    <li>Support us by viewing our ads</li>
+                    <li>Copy and use your generated key</li>
+                    <li>Each key is randomly generated and unique</li>
+                </ul>
+            </div>
+            <button id="generateBtn" class="generate-btn">
+                🔑 Generate License Key
+            </button>
+            <div id="keyDisplay" class="key-display">
+            </div>
+        </div>
+    </div>
+    <div class="ad-container">
+        <div class="ad-banner">
+                <!-- Ad2 -->
+                <ins class="adsbygoogle" data-ad-client="ca-pub-5327207301471176" data-ad-format="auto" data-ad-slot="6541775819" data-full-width-responsive="true" style="display:block"></ins>
+        </div>
+        <small style="color: #a0aec0;">Sponsored Content</small>
+    </div>
+    <div class="footer">
+        <div class="footer-ad">
+                <!-- Footer Ad -->
+                <ins class="adsbygoogle" data-ad-client="ca-pub-5327207301471176" data-ad-format="auto" data-ad-slot="6541775819" data-full-width-responsive="true" style="display:block"></ins>
+        </div>
+    </div>
+</div>
+
+    <!-- Interstitial Ad Modal -->
+    <div id="adModal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>🎯 Thank you for using our service!</h2>
+            <p style="margin: 15px 0;">
+                Please view this advertisement to support our platform:</p>
+            <div class="modal-ad-container">
+                <!-- Interstitial Ad -->
+                <ins class="adsbygoogle" data-ad-client="ca-pub-5327207301471176" data-ad-format="auto" data-ad-slot="5988894433" data-full-width-responsive="true" style="display:block"></ins>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.9;">
+                Your support helps us keep this service free! ❤️</p>
+        </div>
+</div>
+
+    <script>
+        // Global variables
+        let hasGeneratedKey = false;
+        
+        // Initialize DOM elements after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('adModal');
+            const closeBtn = document.querySelector('.close');
+            const generateBtn = document.getElementById('generateBtn');
+
+            // Modal functionality
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    if (modal) modal.style.display = 'none';
+                });
+            }
+
+            // Close modal if clicked outside content
+            window.addEventListener('click', function(event) {
+                if (event.target === modal && modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            function generateKey() {
+                // Generate key: 4 groups of 5 alphanumeric characters
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                let key = '';
+                for (let i = 0; i < 4; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        key += chars.charAt(Math.floor(Math.random() * chars.length));
+                    }
+                    if (i < 3) key += '-';
+                }
+                return key;
+            }
+
+            function displayKey(key) {
+                const keyDisplay = document.getElementById('keyDisplay');
+                if (keyDisplay) {
+                    keyDisplay.innerHTML = `
+                        <div style="margin-bottom: 15px;">
+                            <strong>Your Generated License Key:</strong>
+                        </div>
+                        <div style="font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 2px;">
+                            ${key}
+                        </div>
+                        <button class="copy-btn" onclick="copyKey('${key}')">
+                            📋 Copy Key
+                        </button>
+                    `;
+                    keyDisplay.style.display = 'block';
+                    
+                    // Send key back to .NET application
+                    try {
+                        if (window.chrome && window.chrome.webview) {
+                            window.chrome.webview.postMessage({
+                                type: 'keyGenerated',
+                                key: key
+                            });
+                        } else if (window.external && window.external.notify) {
+                            window.external.notify(JSON.stringify({
+                                type: 'keyGenerated',
+                                key: key
+                            }));
+                        }
+                    } catch (e) {
+                        console.log('WebView communication not available');
+                    }
+                }
+            }
+
+            // Global function for copy button
+            window.copyKey = function(key) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(key).then(() => {
+                        showNotification('✅ Key copied to clipboard!');
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        fallbackCopyText(key);
+                    });
+                } else {
+                    fallbackCopyText(key);
+                }
+            };
+
+            function fallbackCopyText(text) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showNotification('✅ Key copied to clipboard!');
+                } catch (err) {
+                    showNotification('❌ Failed to copy key. Please select and copy manually.');
+                }
+                
+                document.body.removeChild(textArea);
+            }
+
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #38a169, #2d7d47);
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                    z-index: 10000;
+                    font-weight: 600;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideIn 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                        if (document.head.contains(style)) {
+                            document.head.removeChild(style);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            // Main generate button functionality
+            if (generateBtn) {
+                generateBtn.addEventListener('click', function() {
+                    const btn = this;
+                    
+                    // Show interstitial ad on first use
+                    if (!hasGeneratedKey && modal) {
+                        modal.style.display = 'flex';
+                        hasGeneratedKey = true;
+                        
+                        if (closeBtn) {
+                            const handleCloseClick = function() {
+                                modal.style.display = 'none';
+                                setTimeout(() => {
+                                    showNotification('🎉 Thank you for your support!');
+                                }, 500);
+                            };
+                            closeBtn.addEventListener('click', handleCloseClick);
+                        }
+                    }
+                    
+                    // Always generate key immediately
+                    generateAndDisplayKey(btn);
+                });
+            }
+
+            function generateAndDisplayKey(btn) {
+                // Disable button and show loading state
+                btn.disabled = true;
+                btn.innerHTML = '⏳ Generating Key...';
+                btn.style.background = 'linear-gradient(135deg, #a0aec0, #718096)';
+                
+                // Generate key with a small delay for UX
+                setTimeout(() => {
+                    const key = generateKey();
+                    displayKey(key);
+                    
+                    // Reset button
+                    btn.disabled = false;
+                    btn.innerHTML = '🔄 Generate New Key';
+                    btn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    
+                    // Scroll to key display
+                    const keyDisplayEl = document.getElementById('keyDisplay');
+                    if (keyDisplayEl) {
+                        keyDisplayEl.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }
+                    
+                }, 1500); // Reduced delay
+            }
+
+            // Initialize AdSense ads with error handling
+            setTimeout(() => {
+                try {
+                    if (typeof adsbygoogle !== 'undefined') {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                } catch (e) {
+                    console.log('AdSense loading (blocked by ad-blocker or network)');
+                }
+                
+                // Handle ad loading fallbacks
+                setTimeout(() => {
+                    const adBanners = document.querySelectorAll('.ad-banner');
+                    adBanners.forEach(banner => {
+                        if (banner) {
+                            const adsbyGoogleEl = banner.querySelector('.adsbygoogle');
+                            if (!adsbyGoogleEl || adsbyGoogleEl.children.length === 0) {
+                                banner.innerHTML = `
+                                    <div style="
+                                        color: #a0aec0; 
+                                        font-size: 14px; 
+                                        text-align: center;
+                                        padding: 60px 20px;
+                                        background: linear-gradient(45deg, #f7fafc, #edf2f7);
+                                        border-radius: 10px;
+                                        border: 2px dashed #cbd5e0;
+                                    ">
+                                        <div style="font-size: 24px; margin-bottom: 10px;">📢</div>
+                                        <strong>Advertisement Space</strong><br>
+                                        <small>Ads help keep this service free</small>
+                                    </div>
+                                `;
+                            }
+                        }
+                    });
+                    
+                    // Handle footer ad
+                    const footerAd = document.querySelector('.footer-ad');
+                    if (footerAd) {
+                        const footerAdSense = footerAd.querySelector('.adsbygoogle');
+                        if (!footerAdSense || footerAdSense.children.length === 0) {
+                            footerAd.innerHTML = `
+                                <div style="color: #a0aec0; font-size: 12px; text-align: center; padding: 20px;">
+                                    728x90 Footer Advertisement Space
+                                </div>
+                            `;
+                        }
+                    }
+                }, 3000);
+            }, 1000);
+
+            // Handle messages from .NET application
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'resetKey') {
+                    location.reload();
+                } else if (event.data && event.data.type === 'generateNewKey') {
+                    if (generateBtn) generateBtn.click();
+                }
+            });
+
+            // Add interactive effects
+            document.addEventListener('mousemove', function(e) {
+                const cards = document.querySelectorAll('.ad-container, .main-content');
+                cards.forEach(card => {
+                    if (card) {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                            const xPercent = x / rect.width;
+                            const yPercent = y / rect.height;
+                            const tiltX = (yPercent - 0.5) * 5;
+                            const tiltY = (xPercent - 0.5) * -5;
+                            
+                            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.01)`;
+                            card.style.transition = 'transform 0.1s ease-out';
+                        } else {
+                            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                            card.style.transition = 'transform 0.3s ease-out';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
